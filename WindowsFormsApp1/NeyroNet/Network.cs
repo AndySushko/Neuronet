@@ -6,8 +6,8 @@ namespace WindowsFormsApp1.NeyroNet
     class Network
     {
         private InputLayer input_layer = null;
-        private HiddenLayer hidden_layer1 = new HiddenLayer(70, 15, NeuronType.Hidden, nameof(hidden_layer1));
-        private HiddenLayer hidden_layer2 = new HiddenLayer(31, 70, NeuronType.Hidden, nameof(hidden_layer2));
+        private HiddenLayer hidden_layer1 = new HiddenLayer(78, 15, NeuronType.Hidden, nameof(hidden_layer1));
+        private HiddenLayer hidden_layer2 = new HiddenLayer(31, 78, NeuronType.Hidden, nameof(hidden_layer2));
         private OutputLayer output_layer = new OutputLayer(10, 31, NeuronType.Output, nameof(output_layer));
         //массив для хранения выхода сети
         public double[] fact = new double[10];
