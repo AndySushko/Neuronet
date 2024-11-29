@@ -1,0 +1,112 @@
+Random rand = new Random();
+        double[] values = new double[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            double u1 = rand.NextDouble(); // [0,1) 
+            double u2 = rand.NextDouble(); // [0,1) 
+            double z0 = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Cos(2.0 * Math.PI * u2); // Направление полярных координат
+
+            // Применяем параметры нормального распределения
+            values[i] = z0 * stdDev + mean;
+        }
+
+        return values;
+
+
+
+
+
+
+
+
+
+Random random = new Random();
+                    double expected_value;  //мат. ожидание
+                    double standard_deviation; //среднеквадратичное отклонени
+                    double correction;  //смещение
+                    tmpStrWeights = new string[numofneurons];
+
+                    for (i = 0; i < numofneurons; i++)
+                    {
+                        expected_value = 0;
+                        standard_deviation = 0;
+                        for (j = 0; j < numofprevneurons + 1; j++)
+                        {
+                            weights[i, j] = random.NextDouble();
+                            expected_value += weights[i, j];
+                        }
+                        correction = expected_value / numofprevneurons;
+                        for (j = 0; j < numofprevneurons + 1; j++)
+                        {
+                            weights[i, j] -= correction;
+                            standard_deviation += Math.Sqrt(Math.Pow(weights[i, j], 2));
+                        }
+                        standard_deviation /= numofprevneurons;
+                        for (j = 0; j < numofprevneurons + 1; j++)
+                        {
+                            weights[i, j] /= standard_deviation;
+                        }
+
+                        tmpStr = weights[i, 0].ToString();
+                        for (j = 1; j < numofprevneurons + 1; j++)
+                        {
+                            tmpStr += ';' + weights[i, j].ToString();
+                        }
+                        tmpStrWeights[i] = tmpStr;
+                    }
+
+                    File.WriteAllLines(path, tmpStrWeights);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Random rand = new Random();
+
+                    double mean = 0;    // среднее (мат. ожидание)
+                    double stdDev = 0.25;  // стандартное отклонение
+                    tmpStrWeights = new string[numofneurons];
+
+                    for (i = 0; i < numofneurons; i++)
+                    {
+                        for (j = 0; j < numofprevneurons + 1; j++)
+                        {
+                            double u1 = rand.NextDouble(); // [0,1) 
+                            double u2 = rand.NextDouble(); // [0,1) 
+                            double z0 = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Cos(2.0 * Math.PI * u2); // Направление полярных координат
+
+                            // Применяем параметры нормального распределения
+                            weights[i, j] = z0 * stdDev + mean;
+                        }
+
+                        tmpStr = weights[i, 0].ToString();
+                        for (j = 0; j < numofprevneurons + 1; j++)
+                        {
+                            tmpStr += ';' + weights[i, j].ToString();
+                        }
+                        tmpStrWeights[i] = tmpStr;
+
+                    }
+                    File.WriteAllLines(path, tmpStrWeights);
+                    break;
