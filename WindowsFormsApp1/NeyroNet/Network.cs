@@ -22,9 +22,11 @@ namespace WindowsFormsApp1.NeyroNet
         //конструктор
         public Network() { }
 
+
+        // метод Train
         public void Train(Network net)
         {
-            int epoches = 90; // количество эпох обучения
+            int epoches = 12; // количество эпох обучения
             net.input_layer = new InputLayer(NetworkMode.Train);
             double tmpSumError; // временная переменная  суммы ошибок
             double[] errors;    // вектор (массив) сигнала ошибки выходного слоя
@@ -79,6 +81,51 @@ namespace WindowsFormsApp1.NeyroNet
             net.hidden_layer2.Recognize(null, net.output_layer);
             net.output_layer.Recognize(net, null);
         }
+
+
+        // метод Test
+        public void Test(Network net)
+        {
+            int epoches = 2; // количество эпох обучения
+            net.input_layer = new InputLayer(NetworkMode.Test);
+            double tmpSumError; // временная переменная  суммы ошибок
+            double[] errors;    // вектор (массив) сигнала ошибки выходного слоя
+
+            e_error_avr = new double[epoches];
+            for (int k = 0; k < epoches; k++)
+            {
+                e_error_avr[k] = 0;
+                for (int i = 0; i < net.input_layer.Testset.GetLength(0); i++)
+                {
+                    // Прямой проход
+                    double[] inputTest = new double[15];
+
+                    for (int j = 1; j < net.input_layer.Testset.GetLength(1); j++)
+                        inputTest[j - 1] = net.input_layer.Testset[i, j];
+
+
+                    int desiredOutput = (int)net.input_layer.Testset[i, 0]; // извлекаем метку из первого столбца
+                    ForwardPass(net, inputTest); // передаем входные данные в метод прямого прохода
+
+                    tmpSumError = 0; // вычисление сумм ошибок
+                    errors = new double[net.fact.Length];
+
+                    for (int x = 0; x < errors.Length; x++) // цикл перебора выходных нейронов
+                    {
+                        errors[x] = (x == desiredOutput) ? -(net.fact[x] - 1.0d) : -net.fact[x]; // вычисляем ошибку
+                        tmpSumError += errors[x] * errors[x] / 2;
+                    }
+                    e_error_avr[k] += tmpSumError / errors.Length; // суммарное значение энергии ошибки
+                }
+                e_error_avr[k] /= net.input_layer.Testset.GetLength(0); // усреднение ошибки по всем примерам
+            }
+            net.input_layer = null; // обнуление входного слоя (уборка)
+
+            net.hidden_layer1.WeightInitialize(MemoryMode.SET, nameof(hidden_layer1) + "_memory.csv");
+            net.hidden_layer2.WeightInitialize(MemoryMode.SET, nameof(hidden_layer2) + "_memory.csv");
+            net.output_layer.WeightInitialize(MemoryMode.SET, nameof(output_layer) + "_memory.csv");
+        }
+
 
     }
 }

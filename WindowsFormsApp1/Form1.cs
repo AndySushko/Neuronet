@@ -101,5 +101,15 @@ namespace WindowsFormsApp1
         {
             SaveTest(numericUpDown1.Value, inputPixels);
         }
+
+        private void button_Test_Click(object sender, EventArgs e)
+        {
+            network.Test(network);
+            for (int i = 0; i<network.E_error_avr.Length; i++)
+            {
+                chart_Eavr.Series[0].Points.AddY(network.E_error_avr[i]);
+            }
+            MessageBox.Show("Тестирование успешно завершено.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

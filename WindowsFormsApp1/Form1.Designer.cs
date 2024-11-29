@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -54,6 +54,7 @@
             this.labelProbability = new System.Windows.Forms.Label();
             this.button16 = new System.Windows.Forms.Button();
             this.chart_Eavr = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.button_Test = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_Eavr)).BeginInit();
             this.SuspendLayout();
@@ -262,27 +263,38 @@
             // 
             // chart_Eavr
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart_Eavr.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.chart_Eavr.ChartAreas.Add(chartArea1);
             this.chart_Eavr.Location = new System.Drawing.Point(372, 32);
             this.chart_Eavr.Name = "chart_Eavr";
-            series2.BorderWidth = 3;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Name = "Series_Eavr";
-            this.chart_Eavr.Series.Add(series2);
+            series1.BorderWidth = 3;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "Series_Eavr";
+            this.chart_Eavr.Series.Add(series1);
             this.chart_Eavr.Size = new System.Drawing.Size(361, 277);
             this.chart_Eavr.TabIndex = 24;
             this.chart_Eavr.Text = "chart1";
-            title2.Name = "Title1";
-            title2.Text = "График средних энергий ошибок";
-            this.chart_Eavr.Titles.Add(title2);
+            title1.Name = "Title1";
+            title1.Text = "График средних энергий ошибок";
+            this.chart_Eavr.Titles.Add(title1);
+            // 
+            // button_Test
+            // 
+            this.button_Test.Location = new System.Drawing.Point(208, 314);
+            this.button_Test.Name = "button_Test";
+            this.button_Test.Size = new System.Drawing.Size(130, 34);
+            this.button_Test.TabIndex = 25;
+            this.button_Test.Text = "Test";
+            this.button_Test.UseVisualStyleBackColor = true;
+            this.button_Test.Click += new System.EventHandler(this.button_Test_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button_Test);
             this.Controls.Add(this.chart_Eavr);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.labelProbability);
@@ -340,6 +352,7 @@
         private System.Windows.Forms.Label labelProbability;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_Eavr;
+        private System.Windows.Forms.Button button_Test;
     }
 }
 

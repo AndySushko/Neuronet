@@ -11,6 +11,7 @@ namespace WindowsFormsApp1.NeyroNet
         private double[] _inputs;//его входы
         private double _output;//его выход
         private double _derivative;
+
         //константы для функции активации
         private double a = 0.01;
         public double[] Weights { get => _weights; set => _weights = value; }
@@ -21,6 +22,7 @@ namespace WindowsFormsApp1.NeyroNet
         }
         public double Output { get => _output; }
         public double Derivative { get => _derivative; }
+
         //конструктор
         public Neuron(double[] weights, NeuronType type)
         {
@@ -36,8 +38,8 @@ namespace WindowsFormsApp1.NeyroNet
             switch (_type)
             {
                 case NeuronType.Hidden:
-                    _output = Sigmoid(sum);
-                    _derivative = Sigmoid_Derivative(sum);
+                    _output = LeakyReLu(sum);
+                    _derivative = LeakyReLu_Derivativator(sum);
                     break;
 
                 case NeuronType.Output:
@@ -46,13 +48,9 @@ namespace WindowsFormsApp1.NeyroNet
             }
         }
 
-        private double Sigmoid(double sum) => 1.0 / (1.0 + Math.Exp(-sum));
+        private double LeakyReLu(double sum) => (sum >= 0) ? sum : a * sum;
 
-        private double Sigmoid_Derivative(double sum)
-        {
-            double sigmoid = Sigmoid(sum);
-            return sigmoid * (1 - sigmoid);
-        }
+        private double LeakyReLu_Derivativator(double sum) => (sum >= 0) ? 1 : a; // ?
 
     }
 }
